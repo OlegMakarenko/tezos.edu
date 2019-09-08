@@ -5,19 +5,46 @@ module.exports = function(app, db) {
     });
 
     app.get('/get_table', (req, res) => {
-        res.send(table)
+        const student = students.find(student => student.id === req.query.id)
+        if(student){
+            res.send(student.table)
+        }
+        
     });
 
     app.get('/get_student', (req, res) => {
-        console.log(req.query)
         const student = students.find(student => student.id === req.query.id)
         res.send(student)
     });
 
     app.post('/add_record', (req, res) => {
         console.log(req.body)
+        const student = students.find(student => student.id === req.body.id)
+        if(student){
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = mm + '/' + dd + '/' + yyyy;
+            student.table.unshift({value: req.body.score, date: today});
+            countToatalScore(student)
+            res.send(student)
+        }
+        
+        
     });
 
+}
+
+function countToatalScore(student) {
+    var total = 0;
+    var count = 0;
+    for(var key in student.table) 
+        total += 1*student.table[key].value;
+    
+    student.score = total;
+    return student;
 }
 
 
@@ -25,64 +52,27 @@ module.exports = function(app, db) {
 const students = [
     {
         name: "Taras",
-        score: 85,
-        id: "0xcxcjhjfhsjdhfsjdfsdfsdf1"
+        score: 0,
+        id: "0xcxcjhjfhsjdhfsjdfsdfsdf1",
+        table: [
+        ]
+
     },
     {
         name: "Petro",
-        score: 70,
-        id: "0xcxcjhjfhsjdhfsjdfsdfsdf2"
+        score: 0,
+        id: "0xcxcjhjfhsjdhfsjdfsdfsdf2",
+        table: [
+
+        ]
     },
     {
         name: "Akhmed",
-        score: 93,
-        id: "0xcxcjhjfhsjdhfsjdfsdfsdf3"
+        score: 0,
+        id: "0xcxcjhjfhsjdhfsjdfsdfsdf3",
+        table: [
+
+        ]
     }
 ];
 
-const table = [
-    {
-        date: "14-12-16",
-        value: 10
-    },
-    {
-        date: "14-12-16",
-        value: 10
-    },
-    {
-        date: "14-12-16",
-        value: 10
-    },
-    {
-        date: "14-12-16",
-        value: 10
-    },
-    {
-        date: "14-12-16",
-        value: 10
-    },
-    {
-        date: "14-12-16",
-        value: 10
-    },
-    {
-        date: "14-12-16",
-        value: 10
-    },
-    {
-        date: "14-12-16",
-        value: 10
-    },
-    {
-        date: "14-12-16",
-        value: 10
-    },
-    {
-        date: "14-12-16",
-        value: 10
-    },
-    {
-        date: "14-12-16",
-        value: 10
-    }
-]

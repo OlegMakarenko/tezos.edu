@@ -61,7 +61,10 @@ export default {
     addRecord() {
       if(this.newScore)
       Axios.post('http://localhost:7071/add_record', { id: this.id, score: this.newScore })
-        .then(res => console.log(res))
+        .then(res => {
+          this.score = res.data.score;
+          this.$set(this, "tableData", res.data.table)
+        })
         .catch(err => console.error(err))
       this.newScore = null;
     },
