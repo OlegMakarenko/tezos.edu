@@ -38,7 +38,8 @@ export default {
 
   methods:{
     getStudents() {
-      Axios.get('http://localhost:7071/get_students')
+      //'http://localhost:7071
+      Axios.get('/get_students')
         .then(res => this.$set(this, "students", res.data))
         .catch(err => console.error(err))
     },

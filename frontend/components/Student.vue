@@ -60,7 +60,7 @@ export default {
   methods:{
     addRecord() {
       if(this.newScore)
-      Axios.post('http://localhost:7071/add_record', { id: this.id, score: this.newScore })
+      Axios.post('/add_record', { id: this.id, score: this.newScore })
         .then(res => {
           this.score = res.data.score;
           this.$set(this, "tableData", res.data.table)
@@ -70,7 +70,7 @@ export default {
     },
 
     getStudentInfo() {
-      Axios.get('http://localhost:7071/get_student', { params: { id: this.id } })
+      Axios.get('/get_student', { params: { id: this.id } })
         .then(res => {
           const data = res.data;
           this.$set(this, "score", data.score);
@@ -81,7 +81,7 @@ export default {
 
     getTable() {
       console.log("id ", this.id)
-      Axios.get('http://localhost:7071/get_table', { params: { id: this.id } })
+      Axios.get('/get_table', { params: { id: this.id } })
         .then(res => this.$set(this, "tableData", res.data))
         .catch(err => console.error(err))
     }

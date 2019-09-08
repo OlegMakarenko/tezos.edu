@@ -1,3 +1,5 @@
+connector = require('./bchain_connector');
+
 module.exports = function(app, db) {
 
     app.get('/get_students', (req, res) => {
@@ -28,7 +30,8 @@ module.exports = function(app, db) {
 
             today = mm + '/' + dd + '/' + yyyy;
             student.table.unshift({value: req.body.score, date: today});
-            countToatalScore(student)
+            countToatalScore(student);
+            connector.makeTransaction(req.body.id, req.body.score);
             res.send(student)
         }
         
@@ -51,9 +54,9 @@ function countToatalScore(student) {
 
 const students = [
     {
-        name: "Taras",
+        name: "Misha",
         score: 0,
-        id: "0xcxcjhjfhsjdhfsjdfsdfsdf1",
+        id: "tz1grSQDByRpnVs7sPtaprNZRp531ZKz6Jmm",
         table: [
         ]
 
@@ -61,7 +64,7 @@ const students = [
     {
         name: "Petro",
         score: 0,
-        id: "0xcxcjhjfhsjdhfsjdfsdfsdf2",
+        id: "tz1xcxcjhjfhsjdhfsjdfsdfsdf2",
         table: [
 
         ]
@@ -69,7 +72,7 @@ const students = [
     {
         name: "Akhmed",
         score: 0,
-        id: "0xcxcjhjfhsjdhfsjdfsdfsdf3",
+        id: "tz1xcxcjhjfhsjdhfsjdfsdfsdf3",
         table: [
 
         ]
