@@ -18,7 +18,7 @@
     "body-parser": "^1.18.3",
     "conseiljs": "^0.2.6",
     "element-ui": "^2.10.1",
-    "express": "^4.14.0",
+    "express": "^4.17.3",
     "url-loader": "^1.1.1",
     "vue": "^2.5.11",
     "vue-router": "^3.0.1",
